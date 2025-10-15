@@ -1,9 +1,9 @@
-name: 🌐 Terraform Azure Landing Zone CI/CD
+name: 🌐 Terraform Multi-Env CI/CD
 
 on:
-  pull_request:
-    branches: [ main ]
   push:
+    branches: [ main ]
+  pull_request:
     branches: [ main ]
 
 env:
@@ -11,11 +11,11 @@ env:
 
 jobs:
   terraform:
-    name: "Plan & Apply - ${{ matrix.env }}"
+    name: "Deploy - ${{ matrix.env }}"
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        env: [ dev, preprod, prod ]
+        env: [dev, preprod, prod]
 
     defaults:
       run:
@@ -30,32 +30,25 @@ jobs:
         with:
           terraform_version: 1.7.0
 
-      # 🔐 Parse JSON secrets and export ARM_* vars for Terraform
-      - name: 🔑 Set ARM environment variables
-        run: |
-          echo "ARM_SUBSCRIPTION_ID=$(echo '${{ secrets.AZURE_CREDENTIALS_DEV }}' | jq -r '.subscriptionId')" >> $GITHUB_ENV
-          echo "ARM_CLIENT_ID=$(echo '${{ secrets.AZURE_CREDENTIALS_DEV }}' | jq -r '.clientId')" >> $GITHUB_ENV
-          echo "ARM_CLIENT_SECRET=$(echo '${{ secrets.AZURE_CREDENTIALS_DEV }}' | jq -r '.clientSecret')" >> $GITHUB_ENV
-          echo "ARM_TENANT_ID=$(echo '${{ secrets.AZURE_CREDENTIALS_DEV }}' | jq -r '.tenantId')" >> $GITHUB_ENV
+      # 🔐 Login for each environment
+      - name: 🔐 Azure Login (Dev)
         if: matrix.env == 'dev'
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_DEV }}
 
-      - name: 🔑 Set ARM environment variables (preprod)
-        run: |
-          echo "ARM_SUBSCRIPTION_ID=$(echo '${{ secrets.AZURE_CREDENTIALS_PREPROD }}' | jq -r '.subscriptionId')" >> $GITHUB_ENV
-          echo "ARM_CLIENT_ID=$(echo '${{ secrets.AZURE_CREDENTIALS_PREPROD }}' | jq -r '.clientId')" >> $GITHUB_ENV
-          echo "ARM_CLIENT_SECRET=$(echo '${{ secrets.AZURE_CREDENTIALS_PREPROD }}' | jq -r '.clientSecret')" >> $GITHUB_ENV
-          echo "ARM_TENANT_ID=$(echo '${{ secrets.AZURE_CREDENTIALS_PREPROD }}' | jq -r '.tenantId')" >> $GITHUB_ENV
+      - name: 🔐 Azure Login (Preprod)
         if: matrix.env == 'preprod'
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_PREPROD }}
 
-      - name: 🔑 Set ARM environment variables (prod)
-        run: |
-          echo "ARM_SUBSCRIPTION_ID=$(echo '${{ secrets.AZURE_CREDENTIALS_PROD }}' | jq -r '.subscriptionId')" >> $GITHUB_ENV
-          echo "ARM_CLIENT_ID=$(echo '${{ secrets.AZURE_CREDENTIALS_PROD }}' | jq -r '.clientId')" >> $GITHUB_ENV
-          echo "ARM_CLIENT_SECRET=$(echo '${{ secrets.AZURE_CREDENTIALS_PROD }}' | jq -r '.clientSecret')" >> $GITHUB_ENV
-          echo "ARM_TENANT_ID=$(echo '${{ secrets.AZURE_CREDENTIALS_PROD }}' | jq -r '.tenantId')" >> $GITHUB_ENV
+      - name: 🔐 Azure Login (Prod)
         if: matrix.env == 'prod'
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_PROD }}
 
-      # ✅ Terraform workflow
       - name: 🌍 Terraform Init
         run: terraform init -reconfigure
 
@@ -65,6 +58,6 @@ jobs:
       - name: 📊 Terraform Plan
         run: terraform plan -var-file="${{ matrix.env }}.tfvars" -out=tfplan
 
-      - name: 🚀 Terraform Apply (main branch only)
+      - name: 🚀 Terraform Apply
         if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve "tfplan"
