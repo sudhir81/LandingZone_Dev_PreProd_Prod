@@ -1,0 +1,58 @@
+name: 💥 Terraform Destroy (Manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Which environment to destroy?"
+        type: choice
+        required: true
+        options:
+          - dev
+          - preprod
+          - prod
+
+env:
+  TF_IN_AUTOMATION: "true"
+
+jobs:
+  destroy:
+    name: "Destroy - ${{ inputs.environment }}"
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: envs/${{ inputs.environment }}
+
+    steps:
+      - name: 📦 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🧰 Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.0
+
+      - name: 🔐 Azure Login (dev)
+        if: inputs.environment == 'dev'
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_DEV }}
+
+      - name: 🔐 Azure Login (preprod)
+        if: inputs.environment == 'preprod'
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_PREPROD }}
+
+      - name: 🔐 Azure Login (prod)
+        if: inputs.environment == 'prod'
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_PROD }}
+
+      - name: 🌍 Terraform Init
+        run: terraform init -reconfigure
+
+      - name: 💥 Terraform Destroy
+        run: terraform destroy -auto-approve -var-file="${{ inputs.environment }}.tfvars"

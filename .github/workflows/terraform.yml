@@ -1,0 +1,63 @@
+name: 🌐 Terraform Azure Landing Zone CI/CD
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+env:
+  TF_IN_AUTOMATION: "true"
+
+jobs:
+  terraform:
+    name: "Plan & Apply - ${{ matrix.env }}"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: [ dev, preprod, prod ]
+
+    defaults:
+      run:
+        working-directory: envs/${{ matrix.env }}
+
+    steps:
+      - name: 📦 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🧰 Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.0
+
+      # Login per-environment using the right secret
+      - name: 🔐 Azure Login (dev)
+        if: matrix.env == 'dev'
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_DEV }}
+
+      - name: 🔐 Azure Login (preprod)
+        if: matrix.env == 'preprod'
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_PREPROD }}
+
+      - name: 🔐 Azure Login (prod)
+        if: matrix.env == 'prod'
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_PROD }}
+
+      - name: 🌍 Terraform Init
+        run: terraform init -reconfigure
+
+      - name: ✅ Terraform Validate
+        run: terraform validate
+
+      - name: 📊 Terraform Plan
+        run: terraform plan -var-file="${{ matrix.env }}.tfvars" -out=tfplan
+
+      - name: 🚀 Terraform Apply (main branch only)
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve "tfplan"
