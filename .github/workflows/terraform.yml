@@ -21,6 +21,10 @@ jobs:
       run:
         working-directory: envs/${{ matrix.env }}
 
+    # 👇 THIS BLOCK IS NEW - it connects the workflow to the GitHub Environment
+    environment:
+      name: ${{ matrix.env }}
+
     steps:
       - name: 📦 Checkout
         uses: actions/checkout@v4
