@@ -119,7 +119,9 @@ cd envs/dev       # or preprod / prod
 terraform init
 terraform plan
 terraform apply
+
 ```🤖 CI/CD Pipeline (GitHub Actions)
+
 Workflow	Description
 terraform.yml	Runs terraform init, plan, and apply on push to main
 destroy.yml	Manual workflow to destroy resources
@@ -128,37 +130,30 @@ Secrets	Store service principal credentials in GitHub Secrets (AZURE_CREDENTIALS
 💡 Optional Enhancements:
 
 Add tflint and checkov for IaC scanning
-
 Add terraform fmt & validate for code quality checks
 
 🧩 Terraform Modules
+
 Module	Purpose
 core	Creates resource groups, Key Vault, shared services
 network	Deploys VNet, subnets, NSGs, firewall
 identity	Configures managed identities, RBAC
 governance	Applies Azure Policy, management groups, and tagging
+
 🔐 Security Best Practices
 
 allow_blob_public_access = false by default
-
 min_tls_version = "TLS1_2" enforced
-
 All modules designed with least-privilege RBAC
-
 Private Endpoints for sensitive workloads
-
 Ready for Azure Defender, Sentinel, and Security Center integration
 
 🗺️ Roadmap
 
  Add Azure Policy compliance modules
-
  Add monitoring & diagnostic settings automation
-
  Add AKS / App Service workload examples
-
  Add Terratest & unit testing for modules
-
  Integrate Checkov & TFLint into pipelines
 
 🧠 Best Practices Followed
@@ -169,28 +164,10 @@ Ready for Azure Defender, Sentinel, and Security Center integration
 ✅ Modular design for scalability and reusability
 
 📜 License
-
 This project is licensed under the MIT License.
 
 📞 Contact
 👤 Author: Sudhir Dalvi
 📧 Email: sudhir.dalvi@hotmail.com
 🔗 GitHub: https://github.com/sudhir81
-
-
----
-
-✅ **Why this version will render perfectly:**  
-- All tables use proper `|` Markdown format.  
-- All folder trees and commands are fenced with triple backticks.  
-- Blank lines added after code blocks and diagrams.  
-- Headings are consistently formatted.
-
----
-
-💡 **Pro tip:** Commit this updated version as `README.md` in VS Code or GitHub’s online editor — then click **“Preview”** before pushing. It should now look exactly like your intended structure 🎯
-
----
-
-Would you like me to also generate a **professional project banner (header image)** to place at the very top of the README for even stronger impact? (It increases recruiter attention by ~30% 🚀)
 
