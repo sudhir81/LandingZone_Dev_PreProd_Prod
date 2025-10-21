@@ -35,26 +35,22 @@ It provides a **secure, scalable, policy-driven foundation** to deploy cloud wor
 ## 🏗️ Enterprise Architecture
 
 The solution follows a **hub-and-spoke landing zone model** with centralized governance, platform services, and isolated workload environments.
-
 ```mermaid
 graph TD
-
-
-  A[Management Group & Policies] --> B[Platform Subscription]
+  A[Management Group and Policies] --> B[Platform Subscription]
   A --> C[Development Subscription]
   A --> D[Pre-Production Subscription]
   A --> E[Production Subscription]
 
-  B --> F[Core Services: VNet, Firewall, Bastion, Log Analytics]
-  C --> G[Dev Landing Zone: Workload RGs, App Services, AKS, Storage]
-  D --> H[PreProd Landing Zone: Workload RGs, Databases, APIs]
-  E --> I[Production Landing Zone: Secure, Compliant Workloads]
+  B --> F[Core Services - VNet, Firewall, Bastion, Log Analytics]
+  C --> G[Dev Landing Zone - Workload RGs and App Services]
+  D --> H[PreProd Landing Zone - Workload RGs and Databases]
+  E --> I[Production Landing Zone - Secure Workloads]
 
-  F --> J[Shared Services: Key Vault, Monitoring, Sentinel]
-  G --> K[Dev Workloads: App Services, AKS, Databases]
-  H --> L[PreProd Workloads: API Apps, SQL, Data Services]
-  I --> M[Production Workloads: Enterprise Apps, APIs, ML Models]
-
+  F --> J[Shared Services - Key Vault and Monitoring]
+  G --> K[Dev Workloads - App Services and AKS]
+  H --> L[PreProd Workloads - APIs and Data Services]
+  I --> M[Production Workloads - Enterprise Apps and ML Models]
 
 Key Layers
 
