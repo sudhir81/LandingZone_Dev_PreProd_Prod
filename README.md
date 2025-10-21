@@ -34,106 +34,21 @@ It provides a **secure, scalable, policy-driven foundation** to deploy cloud wor
 
 ## 🏗️ Enterprise Architecture
 
-Key Layers
+The solution follows a **hub-and-spoke landing zone model** with centralized governance, platform services, and isolated workload environments.
 
-| Layer             | Purpose                                                    |
-| ----------------- | ---------------------------------------------------------- |
-| **Management**    | Tenant-wide governance, RBAC, policies, tagging            |
-| **Platform**      | Shared networking, logging, monitoring, security           |
-| **Landing Zones** | Environment-specific infrastructure (Dev, PreProd, Prod)   |
-| **Workloads**     | Application deployments: compute, storage, data, AKS, etc. |
+```mermaid
+graph TD
+  A[Management Group & Policies] --> B[Platform Subscription]
+  A --> C[Development Subscription]
+  A --> D[Pre-Production Subscription]
+  A --> E[Production Subscription]
 
+  B --> F[Core Services: VNet, Firewall, Bastion, Log Analytics]
+  C --> G[Dev Landing Zone: Workload RGs, App Services, AKS, Storage]
+  D --> H[PreProd Landing Zone: Workload RGs, Databases, APIs]
+  E --> I[Production Landing Zone: Secure, Compliant Workloads]
 
-Repo Structure
-
-├── envs/
-│   ├── dev/             # Development environment
-│   ├── preprod/         # Pre-production environment
-│   └── prod/            # Production environment
-│
-├── modules/
-│   ├── core/            # Resource groups, key vault, shared components
-│   ├── network/         # Virtual networks, subnets, NSGs, firewall
-│   ├── identity/        # Managed identities, RBAC
-│   └── governance/      # Policies, management groups
-│
-├── .github/workflows/   # CI/CD pipelines for Terraform
-├── backend.tf.example   # Remote backend state example
-└── README.md
-
-
-🧱 Key Features
-✅ Multi-Environment Landing Zones – Dev, PreProd, Prod 
-✅ Secure Networking – Hub-Spoke VNet, NSG, Azure Firewall 
-✅ Governance & Compliance – Policies, RBAC, Tagging Standards 
-✅ Infrastructure as Code – Reusable Terraform modules 
-✅ CI/CD Automation – GitHub Actions for plan, apply, destroy 
-✅ Secrets Management – Azure Key Vault integrated 
-✅ Scalable & Extensible – Ready for AKS, App Services, Data & AI workloads
-
-⚙️ Deployment Guide
-
-1. 📥 Clone the Repository
-
-git clone https://github.com/sudhir81/LandingZone_Dev_PreProd_Prod.git
-cd LandingZone_Dev_PreProd_Prod
-2. 🔐 Authenticate with Azure
-
-az login
-3. 🏗️ Deploy Infrastructure
-Choose your environment:
-
-cd envs/dev       # or preprod / prod
-terraform init
-terraform plan
-terraform apply
-
-🤖 CI/CD Pipeline (GitHub Actions)
-Workflow	Description
-terraform.yml	Runs terraform init, plan, and apply on push to main
-destroy.yml	Manual workflow to destroy resources
-Secrets	Store service principal credentials in GitHub Secrets (AZURE_CREDENTIALS_DEV, etc.)
-
-💡 Optional enhancements:
-* Add tflint and checkov for IaC scanning
-* Add terraform fmt & validate for code quality checks
-
-🧩 Terraform Modules
-Module	Purpose
-core	Creates resource groups, Key Vault, shared services
-network	Deploys VNet, subnets, NSGs, firewall
-identity	Configures managed identities, RBAC
-governance	Applies Azure Policy, management groups, and tagging
-
-🔐 Security Best Practices
-* allow_blob_public_access = false by default
-* min_tls_version = "TLS1_2" enforced
-* All modules designed with least-privilege RBAC
-* Private Endpoints for sensitive workloads
-* Ready for Azure Defender, Sentinel, and Security Center integration
-
-🗺️ Roadmap
-* Add Azure Policy compliance modules
-* Add monitoring & diagnostic settings automation
-* Add AKS / App Service workload examples
-* Add Terratest & unit testing for modules
-* Integrate Checkov & TFLint into pipelines
-
-🧠 Best Practices Followed
-✅ Built with Microsoft Cloud Adoption Framework (CAF) principles
-✅ Fully GitOps-ready with Terraform + GitHub Actions
-✅ Remote backend with secure state management
-✅ Modular design for scalability and reusability
-
-📜 License
-This project is licensed under the MIT License.
-
-📞 Contact
-👤 Author: Sudhir Dalvi
-📧 Email: sudhir.dalvi@hotmail.com
-🔗 GitHub: https://github.com/sudhir81
-
-
-
-
-  
+  F --> J[Shared Services: Key Vault, Monitoring, Sentinel]
+  G --> K[Dev Workloads: App Services, AKS, Databases]
+  H --> L[PreProd Workloads: API Apps, SQL, Data Services]
+  I --> M[Production Workloads: Enterprise Apps, APIs, ML Models]
