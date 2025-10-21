@@ -114,37 +114,30 @@ Secrets	Store service principal credentials in GitHub Secrets (AZURE_CREDENTIALS
 💡 Optional enhancements:
 
 Add tflint and checkov for IaC scanning
-
 Add terraform fmt & validate for code quality checks
 
 🧩 Terraform Modules
+
 Module	Purpose
 core	Creates resource groups, Key Vault, shared services
 network	Deploys VNet, subnets, NSGs, firewall
 identity	Configures managed identities, RBAC
 governance	Applies Azure Policy, management groups, and tagging
+
 🔐 Security Best Practices
 
 allow_blob_public_access = false by default
-
 min_tls_version = "TLS1_2" enforced
-
 All modules designed with least-privilege RBAC
-
 Private Endpoints for sensitive workloads
-
 Ready for Azure Defender, Sentinel, and Security Center integration
 
 🗺️ Roadmap
 
  Add Azure Policy compliance modules
-
  Add monitoring & diagnostic settings automation
-
  Add AKS / App Service workload examples
-
  Add Terratest & unit testing for modules
-
  Integrate Checkov & TFLint into pipelines
 
 🧠 Best Practices Followed
@@ -159,7 +152,6 @@ Ready for Azure Defender, Sentinel, and Security Center integration
 This project is licensed under the MIT License.
 
 📞 Contact
-
 👤 Author: Sudhir Dalvi
 📧 Email: sudhir.dalvi@hotmail.com
 
