@@ -61,16 +61,15 @@ Repo Structure
 ├── backend.tf.example   # Remote backend state example
 └── README.md
 
+
 🧱 Key Features
-
-✅ Multi-Environment Landing Zones – Dev, PreProd, Prod
-✅ Secure Networking – Hub-Spoke VNet, NSG, Azure Firewall
-✅ Governance & Compliance – Policies, RBAC, Tagging Standards
-✅ Infrastructure as Code – Reusable Terraform modules
-✅ CI/CD Automation – GitHub Actions for plan, apply, destroy
-✅ Secrets Management – Azure Key Vault integrated
+✅ Multi-Environment Landing Zones – Dev, PreProd, Prod 
+✅ Secure Networking – Hub-Spoke VNet, NSG, Azure Firewall 
+✅ Governance & Compliance – Policies, RBAC, Tagging Standards 
+✅ Infrastructure as Code – Reusable Terraform modules 
+✅ CI/CD Automation – GitHub Actions for plan, apply, destroy 
+✅ Secrets Management – Azure Key Vault integrated 
 ✅ Scalable & Extensible – Ready for AKS, App Services, Data & AI workloads
-
 
 ⚙️ Deployment Guide
 
