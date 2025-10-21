@@ -51,16 +51,4 @@ graph TD
   F --> J[Shared Services: Key Vault, Monitoring, Sentinel]
   G --> K[Dev Workloads: App Services, AKS, Databases]
   H --> L[PreProd Workloads: API Apps, SQL, Data Services]
-  I --> M[Production Workloads: Enterprise Apps, APIs, ML Models].```
-
-
-
-
-
-
-| Layer             | Purpose                                                    |
-| ----------------- | ---------------------------------------------------------- |
-| **Management**    | Tenant-wide governance, RBAC, policies, tagging            |
-| **Platform**      | Shared networking, logging, monitoring, security           |
-| **Landing Zones** | Environment-specific infrastructure (Dev, PreProd, Prod)   |
-| **Workloads**     | Application deployments: compute, storage, data, AKS, etc. |
+  I --> M[Production Workloads: Enterprise Apps, APIs, ML Models].
