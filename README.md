@@ -51,7 +51,8 @@ graph TD
   F --> J[Shared Services: Key Vault, Monitoring, Sentinel]
   G --> K[Dev Workloads: App Services, AKS, Databases]
   H --> L[PreProd Workloads: API Apps, SQL, Data Services]
-  I --> M[Production Workloads: Enterprise Apps, APIs, ML Models].
+  I --> M[Production Workloads: Enterprise Apps, APIs, ML Models].```
+
 
 
 
