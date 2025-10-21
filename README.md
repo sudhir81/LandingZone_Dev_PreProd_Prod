@@ -41,12 +41,10 @@ graph TD
   A --> C[Development Subscription]
   A --> D[Pre-Production Subscription]
   A --> E[Production Subscription]
-
   B --> F[Core Services - VNet, Firewall, Bastion, Log Analytics]
   C --> G[Dev Landing Zone - Workload RGs and App Services]
   D --> H[PreProd Landing Zone - Workload RGs and Databases]
   E --> I[Production Landing Zone - Secure Workloads]
-
   F --> J[Shared Services - Key Vault and Monitoring]
   G --> K[Dev Workloads - App Services and AKS]
   H --> L[PreProd Workloads - APIs and Data Services]
