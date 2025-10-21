@@ -10,15 +10,12 @@ It is designed as a secure, scalable, policy-driven foundation for deploying clo
 
 The landing zone follows a **hub-and-spoke model** with centralized governance, shared services, and isolated workloads:
 
-```mermaid
-
-graph TD
     A[Management Group] --> B[Subscription: Platform]
     A --> C[Subscription: Dev]
     A --> D[Subscription: PreProd]
     A --> E[Subscription: Prod]
 
-    B --> F[Core Network Hub (VNet, Firewall, Bastion)]
+    B --> F[Core Network Hub - VNet & Firewall]
     C --> G[App Landing Zone - Dev]
     D --> H[App Landing Zone - PreProd]
     E --> I[App Landing Zone - Prod]
