@@ -9,8 +9,8 @@ It is designed as a secure, scalable, policy-driven foundation for deploying clo
 ## 🌐 Architecture Overview
 
 The landing zone follows a **hub-and-spoke model** with centralized governance, shared services, and isolated workloads:
+```mermaid
 
-```mermaid```mermaid
 graph TD
     A[Management Group] --> B[Subscription: Platform]
     A --> C[Subscription: Dev]
@@ -25,6 +25,7 @@ graph TD
     G --> J[App Services / AKS / Storage / DB]
     H --> K[App Services / AKS / Storage / DB]
     I --> L[App Services / AKS / Storage / DB]
+
 
 
 ---------------------------------------------------------------------------------------------
