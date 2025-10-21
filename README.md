@@ -7,7 +7,7 @@ It is designed as a secure, scalable, policy-driven foundation for deploying clo
 ---
 
 ## 🌐 Architecture Overview
-
+```mermaid
 graph TD
     A[Management Group] --> B[Subscription: Platform]
     A --> C[Subscription: Dev]
@@ -22,7 +22,6 @@ graph TD
     G --> J[App Services / AKS / Storage / DB]
     H --> K[App Services / AKS / Storage / DB]
     I --> L[App Services / AKS / Storage / DB]
-
 
 
 ---------------------------------------------------------------------------------------------
