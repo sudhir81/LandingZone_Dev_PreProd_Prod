@@ -5,8 +5,6 @@ This repository provides a **complete, enterprise-grade Azure Landing Zone** bui
 It is designed as a secure, scalable, policy-driven foundation for deploying cloud workloads across multiple environments using best practices in **governance, identity, networking, automation, and DevOps.**
 
 ---
-
-## 🌐 Architecture Overview
 ```mermaid
 graph TD
     A[Management Group] --> B[Subscription: Platform]
