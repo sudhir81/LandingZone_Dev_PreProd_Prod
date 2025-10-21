@@ -64,14 +64,16 @@ Repo Structure
 🧱 Key Features
 
 ✅ Multi-Environment Landing Zones – Dev, PreProd, Prod
-✅ Secure Networking –               Hub-Spoke VNet, NSG, Azure Firewall
-✅ Governance & Compliance –         Policies, RBAC, Tagging Standards
-✅ Infrastructure as Code –          Reusable Terraform modules
-✅ CI/CD Automation –                GitHub Actions for plan, apply, destroy
-✅ Secrets Management –              Azure Key Vault integrated
-✅ Scalable & Extensible –           Ready for AKS, App Services, Data & AI workloads
+✅ Secure Networking – Hub-Spoke VNet, NSG, Azure Firewall
+✅ Governance & Compliance – Policies, RBAC, Tagging Standards
+✅ Infrastructure as Code – Reusable Terraform modules
+✅ CI/CD Automation – GitHub Actions for plan, apply, destroy
+✅ Secrets Management – Azure Key Vault integrated
+✅ Scalable & Extensible – Ready for AKS, App Services, Data & AI workloads
+
 
 ⚙️ Deployment Guide
+
 1. 📥 Clone the Repository
 
 git clone https://github.com/sudhir81/LandingZone_Dev_PreProd_Prod.git
