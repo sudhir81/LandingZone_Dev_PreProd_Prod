@@ -1,13 +1,39 @@
 # Terraform Multi-Environment (Dev / Preprod / Prod)
 
-This repo contains a minimal, **ready-to-run** Azure Landing Zone skeleton using Terraform with **separate backends** per environment and **GitHub Actions** CI/CD.
+# 🚀 Azure Landing Zone (Dev / PreProd / Prod) — Terraform IaC
 
-## Environments & Backends (Hard-coded)
-- **Dev** → RG: `rg-tfstate-dev`, Storage: `satfdev000`, Container: `tfstate`, Key: `dev.tfstate`
-- **Preprod** → RG: `rg-tfstate-preprod`, Storage: `satfpp000`, Container: `tfstate`, Key: `preprod.tfstate`
-- **Prod** → RG: `rg-tfstate-prod`, Storage: `satfprod000`, Container: `tfstate`, Key: `prod.tfstate`
+## 📌 Overview
+This repository provides a **complete Azure Landing Zone** deployment built with **Terraform** — ready for **Dev**, **PreProd**, and **Production** environments.  
+It follows **Microsoft's Cloud Adoption Framework (CAF)** best practices and provides a secure, scalable, and policy-driven foundation for deploying enterprise workloads.
 
-> Subscription ID (used by all envs): `1c95c3eb-55ac-4d47-bee1-e823c941e413`
+Key features:
+- 🌐 Multi-environment infrastructure (Dev / PreProd / Prod)
+- 🔐 Secure governance & RBAC policies
+- 🏗️ Reusable Terraform modules
+- ⚙️ GitHub Actions CI/CD pipelines
+- 📊 Centralized logging, security, and network configuration
+
+---
+
+## 🏗️ Architecture Overview
+
+The solution follows a **hub-spoke landing zone architecture**:
+
+```mermaid
+graph TD
+    A[Management Group] --> B[Subscription: Platform]
+    A --> C[Subscription: Dev]
+    A --> D[Subscription: PreProd]
+    A --> E[Subscription: Prod]
+
+    B --> F[Core Network Hub (VNet, Firewall, Bastion)]
+    C --> G[App Landing Zone - Dev]
+    D --> H[App Landing Zone - PreProd]
+    E --> I[App Landing Zone - Prod]
+
+    G --> J[App Service / AKS / Storage / DB]
+    H --> K[App Service / AKS / Storage / DB]
+    I --> L[App Service / AKS / Storage / DB]
 
 ## Layout
 ```
