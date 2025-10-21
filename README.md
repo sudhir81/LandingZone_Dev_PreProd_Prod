@@ -11,6 +11,7 @@ It is designed as a secure, scalable, policy-driven foundation for deploying clo
 The landing zone follows a **hub-and-spoke model** with centralized governance, shared services, and isolated workloads:
 
     A[Management Group] --> B[Subscription: Platform]
+    
     A --> C[Subscription: Dev]
     A --> D[Subscription: PreProd]
     A --> E[Subscription: Prod]
