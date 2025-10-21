@@ -38,6 +38,8 @@ The solution follows a **hub-and-spoke landing zone model** with centralized gov
 
 ```mermaid
 graph TD
+
+
   A[Management Group & Policies] --> B[Platform Subscription]
   A --> C[Development Subscription]
   A --> D[Pre-Production Subscription]
