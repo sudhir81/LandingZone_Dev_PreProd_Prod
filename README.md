@@ -73,67 +73,55 @@ cd envs/dev      # or preprod / prod
 terraform init
 terraform plan
 terraform apply
+---------------------------------------------------------------------------------------------
 
 🤖 CI/CD Pipeline (GitHub Actions)
 
 terraform.yml – Runs terraform init, plan, and apply on push to main.
-
 destroy.yml – Manual workflow to destroy resources per environment.
-
 Environment-specific secrets (AZURE_CREDENTIALS_DEV, etc.) are used for authentication.
+---------------------------------------------------------------------------------------------
 
 🧱 Terraform Modules
-Module	Purpose
-core	Creates resource groups, key vault, and shared services
-network	Deploys virtual networks, subnets, NSGs, and firewall
+Module    	Purpose
+core    	Creates resource groups, key vault, and shared services
+network    	Deploys virtual networks, subnets, NSGs, and firewall
 identity	Configures managed identities, role assignments, and RBAC
-governance	Applies policies, management group structure, and compliance standards
+governance 	Applies policies, management group structure, and compliance standards
+---------------------------------------------------------------------------------------------
+
 🔐 Security Best Practices
 
 allow_blob_public_access = false by default
-
-min_tls_version = "TLS1_2" enforced
-
+min_tls_version = "TLS1_2" enforce
 All modules designed with least-privilege RBAC principles
-
 Support for private endpoints and secure networking
-
 Integration-ready with Azure Defender, Sentinel, and Security Center
+---------------------------------------------------------------------------------------------
 
 🗺️ Roadmap
-
  Add Azure Policy assignments and compliance baselines
-
  Add Azure Monitor, Log Analytics, and Diagnostic Settings module
-
  Add sample workload deployment (App Service / AKS)
-
  Add module unit testing with Terratest
-
  Integrate Checkov and TFLint into CI/CD pipeline
-
+ ---------------------------------------------------------------------------------------------
+ 
 🧠 Best Practices Followed
-
 ✅ Aligned with Microsoft Cloud Adoption Framework (CAF)
-
 ✅ Supports GitOps / DevOps automation workflows
-
 ✅ Uses remote state backend with Azure Storage
-
 ✅ Built with Terraform modules for reusability and scalability
-
+---------------------------------------------------------------------------------------------
 📜 License
-
 This project is open source and available under the MIT License.
-
+---------------------------------------------------------------------------------------------
 🤝 Contributing
-
 Contributions are welcome!
 Feel free to fork this repo, open issues, or submit pull requests to improve features, modules, and automation.
 
 📞 Contact
-
 👤 Author: Sudhir Dalvi
 📧 Email: sudhir.dalvi@hotmail.com
-
 🔗 GitHub: https://github.com/sudhir81
+---------------------------------------------------------------------------------------------
